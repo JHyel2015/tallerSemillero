@@ -17,6 +17,7 @@ public class ServicioBase {
 		if (conexion != null) {
 			try {
 				conexion.close();
+				System.out.println("Conexión cerrada");
 			} catch (SQLException e) {
 				e.printStackTrace();
 				System.out.println("Error al cerrar la conexión");
