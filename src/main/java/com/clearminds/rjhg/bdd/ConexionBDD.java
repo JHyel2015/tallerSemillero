@@ -1,5 +1,6 @@
 package com.clearminds.rjhg.bdd;
 
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
@@ -12,6 +13,8 @@ import com.clearminds.rjhg.excepciones.BDDException;
 
 public class ConexionBDD {
 	public static String leerPropiedad(String nombre) {
+		File f = new File("conexion.properties");
+		System.out.println(f.getAbsolutePath());
 		Properties p = new Properties();
 		try {
 			p.load(new FileReader("conexion.properties"));
