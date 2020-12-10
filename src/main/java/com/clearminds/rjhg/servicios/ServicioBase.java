@@ -8,6 +8,14 @@ import com.clearminds.rjhg.excepciones.BDDException;
 
 public class ServicioBase {
 	private Connection conexion;
+
+	public Connection getConexion() {
+		return conexion;
+	}
+
+	public void setConexion(Connection conexion) {
+		this.conexion = conexion;
+	}
 	
 	public void abrirConexion() throws BDDException {
 		conexion = ConexionBDD.obtenerConexion();
@@ -23,13 +31,5 @@ public class ServicioBase {
 				System.out.println("Error al cerrar la conexión");
 			}
 		}
-	}
-
-	public Connection getConexion() {
-		return conexion;
-	}
-
-	public void setConexion(Connection conexion) {
-		this.conexion = conexion;
 	}
 }
