@@ -2,9 +2,11 @@ package com.clearminds.rjhg.servicios;
 
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.Date;
 
 import com.clearminds.rjhg.dtos.Estudiante;
 import com.clearminds.rjhg.excepciones.BDDException;
+import com.clearminds.rjhg.utils.DateUtil;
 
 public class ServicioEstudiante extends ServicioBase {
 	public void insertarEstudiante(Estudiante estudiante) throws BDDException {
@@ -14,14 +16,16 @@ public class ServicioEstudiante extends ServicioBase {
 		try {
 			stmt = getConexion().createStatement();
 			
-			String sql = "insert into estudiantes(nombre,apellido,edad) values('" + 
+			String sql = "insert into estudiantes(nombre,apellido,edad,fecha_modificacion) values('" + 
 			estudiante.getNombre() + "','" + estudiante.getApellido();
 			
 			if (estudiante.getEdad() == 0){
-				sql += "', NULL )";
+				sql += "', NULL ";
 			} else {
-				sql += "'," + estudiante.getEdad() + ")";
+				sql += "'," + estudiante.getEdad();
 			}
+			
+			sql += ",'" + DateUtil.obtenerFecha(new Date()) + "')";
 			
 			
 			System.out.println("Script: " + sql);
@@ -49,7 +53,7 @@ public class ServicioEstudiante extends ServicioBase {
 				sql += ", edad = " + estudiante.getEdad();
 			}
 			
-			sql += " where id = " + estudiante.getId();
+			sql += ", fecha_modificacion = '" + DateUtil.obtenerFecha(new Date()) + "' where id = " + estudiante.getId();
 			
 			System.out.println("Script: " + sql);
 			stmt.executeUpdate(sql);
