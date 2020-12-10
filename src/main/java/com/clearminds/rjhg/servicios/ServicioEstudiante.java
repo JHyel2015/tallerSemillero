@@ -15,7 +15,14 @@ public class ServicioEstudiante extends ServicioBase {
 			stmt = getConexion().createStatement();
 			
 			String sql = "insert into estudiantes(nombre,apellido,edad) values('" + 
-			estudiante.getNombre() + "','" + estudiante.getApellido() + "'," + estudiante.getEdad() + ")";
+			estudiante.getNombre() + "','" + estudiante.getApellido();
+			
+			if (estudiante.getEdad() == 0){
+				sql += "', NULL )";
+			} else {
+				sql += "'," + estudiante.getEdad() + ")";
+			}
+			
 			
 			System.out.println("Script: " + sql);
 			stmt.executeUpdate(sql);
@@ -34,8 +41,15 @@ public class ServicioEstudiante extends ServicioBase {
 			stmt = getConexion().createStatement();
 
 			String sql = "update estudiantes set nombre = '" + 
-			estudiante.getNombre() + "', apellido = '" + estudiante.getApellido() + "', edad = " + estudiante.getEdad() +
-			" where id = " + estudiante.getId();
+			estudiante.getNombre() + "', apellido = '" + estudiante.getApellido() + "'";
+
+			if (estudiante.getEdad() == 0){
+				sql += ", edad = NULL";
+			} else {
+				sql += ", edad = " + estudiante.getEdad();
+			}
+			
+			sql += " where id = " + estudiante.getId();
 			
 			System.out.println("Script: " + sql);
 			stmt.executeUpdate(sql);
